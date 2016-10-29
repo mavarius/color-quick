@@ -2,8 +2,14 @@ const hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D
 
 function colorQuick (shade, hue) {
   let color = '#'
-  let high = 16 * shade
-  let low = high / 2
+  let high, low
+  if (shade) {
+    high = 16 * shade
+    low = high / 2
+  } else {
+    high = 16
+    low = 8
+  }
 
   switch (hue) {
     case 'red':
@@ -54,7 +60,7 @@ function colorQuick (shade, hue) {
 
 let elShade = 1
 
-console.log('colorQuick(red): ', colorQuick(0.8, 'red'))
+console.log('colorQuick(): ', colorQuick())
 
 let magentaBox = document.getElementById('magenta')
 magentaBox.style.backgroundColor = colorQuick(elShade, 'magenta')
@@ -83,8 +89,8 @@ blueBox.style.color = colorQuick(elShade, 'blue')
 let palette = document.getElementById('palette')
 
 let swatch = document.createElement('div')
-swatch.style.width = '100px'
-swatch.style.height = '100px'
+swatch.style.width = '200px'
+swatch.style.height = '200px'
 swatch.style.float = 'left'
 swatch.style.backgroundColor = colorQuick(elShade, 'grayscale')
 
