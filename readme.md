@@ -2,11 +2,11 @@
 
 Randomly generate colors of a specified brightness and hue and return hex values.
 
-## Install
+<!-- ## Install
 
 ```bash
 $ npm install color-quick
-```
+``` -->
 
 ## Usage
 
