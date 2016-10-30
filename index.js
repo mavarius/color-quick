@@ -1,3 +1,4 @@
+// DECLARE HEX VALUES
 const hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
 
 function colorQuick (shade, hue) {
@@ -58,42 +59,142 @@ function colorQuick (shade, hue) {
   return color
 }
 
-let elShade = 1
+function toggleWidget () {
+  if (colorNabWidgetContainer.style.width === '20px') {
+    colorNabWidgetContainer.style.width = '540px'
+    colorNabOpenWidgetBtn.innerHTML = '▶'
+  } else {
+    colorNabWidgetContainer.style.width = '20px'
+    colorNabOpenWidgetBtn.innerHTML = '◀'
+  }
+}
 
-console.log('colorQuick(): ', colorQuick())
+let colorNabWidgetContainer = document.getElementById('colorNabWidgetContainer')
+colorNabWidgetContainer.style.position = 'fixed'
+colorNabWidgetContainer.style.right = '2vmin'
+colorNabWidgetContainer.style.bottom = '2vmin'
+colorNabWidgetContainer.style.width = '20px'
+colorNabWidgetContainer.style.overflow = 'hidden'
+colorNabWidgetContainer.style.boxShadow = '0 0 1px rgba(0, 0, 0, 0.2), 0 2px 1px rgba(0, 0, 0, 0.1)'
+colorNabWidgetContainer.style.transition = 'all 0.5s'
 
-let magentaBox = document.getElementById('magenta')
-magentaBox.style.backgroundColor = colorQuick(elShade, 'magenta')
-magentaBox.style.color = colorQuick(elShade, 'magenta')
+let colorNabWidget = document.createElement('div')
+colorNabWidget.style.height = '100px'
+colorNabWidget.style.width = '500px'
+colorNabWidget.style.display = 'flex'
+colorNabWidget.style.justifyContent = 'space-around'
+colorNabWidget.style.flexDirection = 'row'
+colorNabWidget.style.flexWrap = 'wrap'
+colorNabWidget.style.padding = '10px'
+colorNabWidget.style.backgroundColor = 'white'
+colorNabWidgetContainer.appendChild(colorNabWidget)
 
-let redBox = document.getElementById('red')
-redBox.style.backgroundColor = colorQuick(elShade, 'red')
-redBox.style.color = colorQuick(elShade, 'red')
+let colorNabOpenWidgetBtn = document.createElement('button')
+colorNabOpenWidgetBtn.addEventListener('click', toggleWidget)
+colorNabOpenWidgetBtn.style.height = '120px'
+colorNabOpenWidgetBtn.style.width = '20px'
+colorNabOpenWidgetBtn.style.backgroundColor = 'black'
+colorNabOpenWidgetBtn.style.border = 'none'
+colorNabOpenWidgetBtn.style.borderRadius = '0'
+colorNabOpenWidgetBtn.style.fontSize = '0.8em'
+colorNabOpenWidgetBtn.style.position = 'absolute'
+colorNabOpenWidgetBtn.style.alignSelf = 'center'
+colorNabOpenWidgetBtn.style.color = 'white'
+colorNabOpenWidgetBtn.style.right = '0'
+colorNabWidget.appendChild(colorNabOpenWidgetBtn)
+colorNabOpenWidgetBtn.innerHTML = '◀'
 
-let yellowBox = document.getElementById('yellow')
-yellowBox.style.backgroundColor = colorQuick(elShade, 'yellow')
-yellowBox.style.color = colorQuick(elShade, 'yellow')
 
-let greenBox = document.getElementById('green')
-greenBox.style.backgroundColor = colorQuick(elShade, 'green')
-greenBox.style.color = colorQuick(elShade, 'green')
+let colorSets = document.createElement('div')
+colorSets.style.width = '100%'
+colorSets.style.height = '20px'
+colorSets.style.display = 'flex'
+colorSets.style.justifyContent = 'space-between'
+colorSets.style.borderBottom = '1px solid #F0F0F0'
+colorSets.style.paddingBottom = '10px'
+colorSets.style.marginBottom = '10px'
+colorNabWidget.appendChild(colorSets)
 
-let cyanBox = document.getElementById('cyan')
-cyanBox.style.backgroundColor = colorQuick(elShade, 'cyan')
-cyanBox.style.color = colorQuick(elShade, 'cyan')
+let colorSet = ''
+let counter = 0
 
-let blueBox = document.getElementById('blue')
-blueBox.style.backgroundColor = colorQuick(elShade, 'blue')
-blueBox.style.color = colorQuick(elShade, 'blue')
+for (var i = 1; i <= 21; i++) {
+  let shade = 1 / ((i % 3) || 3)
+  if (shade < 0.4) shade -= 0.18
+  let colorNabColors = ['magenta', 'red', 'yellow', 'green', 'cyan', 'blue', 'grayscale']
+  let hue = colorNabColors[counter]
+  if (!(i % 3) && i > 2) counter++
 
-let palette = document.getElementById('palette')
+  if (i === 1) colorSet += `<span id="" class="colorSet">`
+  colorSet += `<button class="colorNabBtn" style="width:20px; height:20px; border:none;" onclick="makeSwatches(${shade}, '${hue}')"></button>`
+  if (!(i % 3) && i < 19) colorSet += `</span><span class="colorSet" data-magenta="magenta">`
+  if (i === 21) colorSet += '</span>'
+}
 
-let swatch = document.createElement('div')
-swatch.style.width = '200px'
-swatch.style.height = '200px'
-swatch.style.float = 'left'
-swatch.style.backgroundColor = colorQuick(elShade, 'grayscale')
+colorSets.innerHTML = colorSet
 
-palette.appendChild(swatch)
+let colorNabBtns = document.getElementsByClassName('colorNabBtn')
+
+if (colorNabBtns) {
+  colorNabBtns[0].style.backgroundColor = '#FF00FF'
+  colorNabBtns[1].style.backgroundColor = '#880088'
+  colorNabBtns[2].style.backgroundColor = '#220022'
+
+  colorNabBtns[3].style.backgroundColor = '#FF0000'
+  colorNabBtns[4].style.backgroundColor = '#880000'
+  colorNabBtns[5].style.backgroundColor = '#220000'
+
+  colorNabBtns[6].style.backgroundColor = '#FFFF00'
+  colorNabBtns[7].style.backgroundColor = '#888800'
+  colorNabBtns[8].style.backgroundColor = '#222200'
+
+  colorNabBtns[9].style.backgroundColor = '#00FF00'
+  colorNabBtns[10].style.backgroundColor = '#008800'
+  colorNabBtns[11].style.backgroundColor = '#002200'
+
+  colorNabBtns[12].style.backgroundColor = '#00FFFF'
+  colorNabBtns[13].style.backgroundColor = '#008888'
+  colorNabBtns[14].style.backgroundColor = '#002222'
+
+  colorNabBtns[15].style.backgroundColor = '#0000FF'
+  colorNabBtns[16].style.backgroundColor = '#000088'
+  colorNabBtns[17].style.backgroundColor = '#000022'
+
+  colorNabBtns[18].style.backgroundColor = '#EEEEEE'
+  colorNabBtns[19].style.backgroundColor = '#888888'
+  colorNabBtns[20].style.backgroundColor = '#222222'
+}
+
+let palette = document.createElement('div')
+colorNabWidget.appendChild(palette)
+palette.style.display = 'flex'
+palette.style.width = '100%'
+palette.style.height = '60px'
+palette.style.justifyContent = 'space-between'
+palette.style.alignSelf = 'center'
+
+let colorArr = Array(7).fill()
+let swatches = ''
+
+function makeSwatches (shade, hue) {
+  let swatches = ''
+  colorArr = colorArr.map(() => {
+    return colorQuick(shade, hue)
+  })
+  colorArr.map(color => {
+    swatches += `<div style="height:60; width:60px; background-color:${color};" onclick="updateColors()"></div>`
+  })
+  console.log('colorArr: ', colorArr)
+  palette.innerHTML = swatches
+}
+
+function updateColors () {
+  let clickedSwatch = this.event.target
+  let colorNabSetColor = window.getComputedStyle(clickedSwatch, null).getPropertyValue('background-color')
+  let colorNabElements = document.getElementsByClassName('colornab')
+  for (let i = 0; i < colorNabElements.length; i++) {
+    colorNabElements[i].style.backgroundColor = colorNabSetColor
+  }
+}
 
 // module.exports = colorQuick

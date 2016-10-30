@@ -1,11 +1,11 @@
 ## color-quick
 
-Randomly generate colors of a specified brightness and hue and return hex values.
+Randomly generate colors of a specified brightness and hue and copy the hex value to the clipboard.
 
 <!-- ## Install
 
 ```bash
-$ npm install color-quick
+$ npm install colornab
 ``` -->
 
 ## Usage
